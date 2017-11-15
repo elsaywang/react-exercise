@@ -27,11 +27,33 @@ const DATA = {
     { id: 6, name: 'black pudding', type: 'english' }
   ]
 }
+const updateFoodType = e =>{
+  let foodType = e.target.value ;
+}
+
+const getSelectOptions = () =>{
+  const optionList = [...new Set(DATA.items.map(item=>item.type))];
+  return (
+    <select>
+      { optionList.map((item,i) => <option key={i} value={item}>{item}</option>) }
+    </select>
+  )
+}
+
 
 function Menu() {
   return (
     <div>
-      Open the console, you have failing tests.
+      <h1>{DATA.title}</h1>
+      {getSelectOptions()}
+      <ul>
+        {
+          DATA.items.filter(item=>item.type==='mexican').
+            sort(sortBy('name')).
+            map((item,i)=>
+            <li key={i}>{item.name}</li>)
+        }
+      </ul>
     </div>
   )
 }
